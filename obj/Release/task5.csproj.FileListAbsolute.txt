@@ -1,0 +1,10 @@
+G:\myGit\cg-task5\bin\Release\task5.exe.config
+G:\myGit\cg-task5\bin\Release\task5.exe
+G:\myGit\cg-task5\bin\Release\task5.pdb
+G:\myGit\cg-task5\obj\Release\task5.csprojAssemblyReference.cache
+G:\myGit\cg-task5\obj\Release\task5.Form1.resources
+G:\myGit\cg-task5\obj\Release\task5.Properties.Resources.resources
+G:\myGit\cg-task5\obj\Release\task5.csproj.GenerateResource.cache
+G:\myGit\cg-task5\obj\Release\task5.csproj.CoreCompileInputs.cache
+G:\myGit\cg-task5\obj\Release\task5.exe
+G:\myGit\cg-task5\obj\Release\task5.pdb

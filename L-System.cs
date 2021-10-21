@@ -22,7 +22,7 @@ namespace task5
             {
                 var lines = File.ReadAllLines(filename).Select(s => s.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries).ToArray());
                 init = lines.First()[0];
-                angle = double.Parse(lines.First()[1]) * Math.PI / 180.0;
+                angle = double.Parse(lines.First()[1]);
                 dir = (dir)Enum.Parse(typeof(dir), lines.First()[2]);
 
                 foreach (var line in lines.Skip(1))
@@ -35,7 +35,6 @@ namespace task5
             }
             catch (Exception ex)
             {
-
             }
         }
 

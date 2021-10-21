@@ -8,3 +8,13 @@ C:\Users\Tema-\Desktop\Универ\4.1\КГ\task5\obj\Debug\task5.csproj.CoreCo
 C:\Users\Tema-\Desktop\Универ\4.1\КГ\task5\obj\Debug\task5.exe
 C:\Users\Tema-\Desktop\Универ\4.1\КГ\task5\obj\Debug\task5.pdb
 C:\Users\Tema-\Desktop\Универ\4.1\КГ\task5\obj\Debug\task5.Form1.resources
+G:\myGit\cg-task5\bin\Debug\task5.exe.config
+G:\myGit\cg-task5\bin\Debug\task5.exe
+G:\myGit\cg-task5\bin\Debug\task5.pdb
+G:\myGit\cg-task5\obj\Debug\task5.csprojAssemblyReference.cache
+G:\myGit\cg-task5\obj\Debug\task5.Form1.resources
+G:\myGit\cg-task5\obj\Debug\task5.Properties.Resources.resources
+G:\myGit\cg-task5\obj\Debug\task5.csproj.GenerateResource.cache
+G:\myGit\cg-task5\obj\Debug\task5.csproj.CoreCompileInputs.cache
+G:\myGit\cg-task5\obj\Debug\task5.exe
+G:\myGit\cg-task5\obj\Debug\task5.pdb

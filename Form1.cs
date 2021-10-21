@@ -13,82 +13,104 @@ namespace task5
 {
     public partial class Form1 : Form
     {
-        L_System system;
-        int generation = 2;
-        Graphics g;
-        Color line_color = Color.Black;
-        int from_x;
-        int from_y;
+        private L_System system;
+        private static int generation = 2;
+        private Graphics g;
+        private Color line_color = Color.Black;
+        private double len = 300.0 / Math.Pow(1.5, generation);
+        private float width = 5;
 
-        string long_rule;
+        private Random random = new Random();
+
+        private string long_rule;
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            system = new L_System("l-system.txt");
             richTextBox1.Text = File.ReadAllText("l-system.txt");
 
             pictureBox1.Image = new Bitmap(pictureBox1.Width, pictureBox1.Height);
             g = Graphics.FromImage(pictureBox1.Image);
-
-            var s = system.ApplyRules(generation);
-            richTextBox1.Text += "\n\n" + s;
+            g.Clear(Color.White);
 
             textBox1.Text = generation.ToString();
         }
 
         public void Interpret(float x, float y)
         {
-            double len = 100.0 / Math.Pow(2, generation);
-            var angle = DirToAngle(system.dir) * Math.PI / 180.0;
+            var angle = DirToAngle(system.dir);
 
             for (int i = 0; i < long_rule.Length; ++i)
             {
                 if (new char[] { 'F', 'A', 'B', 'X', 'Y' }.Contains(long_rule[i]))
                 {
-                    (x, y) = DrawLine(x, y, angle, len);
+                    (x, y) = DrawLine(x, y, angle, len, width, line_color);
                 }
                 else if (long_rule[i] == '-')
                 {
-                    angle -= system.angle;
+                    if (randomCheckBox.Checked)
+                        angle += random.NextDouble() * system.angle;
+                    else
+                        angle += system.angle;
                 }
                 else if (long_rule[i] == '+')
                 {
-                    angle += system.angle;
+                    if (randomCheckBox.Checked)
+                        angle -= random.NextDouble() * system.angle;
+                    else
+                        angle -= system.angle;
                 }
                 else if (long_rule[i] == '[')
                 {
                     ++i;
-                    InterpretStep(ref i, x, y, angle, len);
+                    InterpretStep(ref i, x, y, angle, len, width, line_color);
+                }
+                else if (long_rule[i] == '@')
+                {
+                    width = width * 2 / 3;
+                    len = len * 4 / 5.0;
+                    line_color = Color.FromArgb((line_color.R + 30) * 4 / 5, line_color.G, line_color.B);
                 }
             }
         }
 
-        private void InterpretStep(ref int i, float x, float y, double angle, double len)
+        private void InterpretStep(ref int i, float x, float y, double angle, double len, float width, Color color)
         {
             while (long_rule[i] != ']')
             {
                 if (new char[] { 'F', 'A', 'B', 'X', 'Y' }.Contains(long_rule[i]))
                 {
-                    (x, y) = DrawLine(x, y, angle, len);
+                    (x, y) = DrawLine(x, y, angle, len, width, line_color);
                 }
                 else if (long_rule[i] == '-')
                 {
-                    angle -= system.angle;
+                    if (randomCheckBox.Checked)
+                        angle += random.NextDouble() * system.angle;
+                    else
+                        angle += system.angle;
                 }
                 else if (long_rule[i] == '+')
                 {
-                    angle += system.angle;
+                    if (randomCheckBox.Checked)
+                        angle -= random.NextDouble() * system.angle;
+                    else
+                        angle -= system.angle;
                 }
                 else if (long_rule[i] == '[')
                 {
                     ++i;
-                    InterpretStep(ref i, x, y, angle, len);
+                    InterpretStep(ref i, x, y, angle, len, width, line_color);
+                }
+                else if (long_rule[i] == '@')
+                {
+                    width = width * 2 / 3;
+                    len = len * 4 / 5.0;
+                    line_color = Color.FromArgb((line_color.R + 30) * 4 / 5, line_color.G, line_color.B);
                 }
                 ++i;
             }
         }
 
-        double DirToAngle(dir dir)
+        private double DirToAngle(dir dir)
         {
             switch (dir)
             {
@@ -100,12 +122,14 @@ namespace task5
             };
         }
 
-        (float, float) DrawLine(float x, float y, double angle, double len)
+        private (float, float) DrawLine(float x, float y, double angle, double len, float width, Color color)
         {
+            angle = angle * Math.PI / 180.0;
+
             float new_x = (float)(x + Math.Cos(angle) * len);
             float new_y = (float)(y + Math.Sin(angle) * len);
 
-            g.DrawLine(new Pen(line_color, 2), x, y, new_x, new_y);
+            g.DrawLine(new Pen(line_color, width), x, y, new_x, new_y);
             pictureBox1.Refresh();
 
             return (new_x, new_y);
@@ -116,18 +140,22 @@ namespace task5
             InitializeComponent();
         }
 
-
-
         private void richTextBox1_TextChanged(object sender, EventArgs e)
         {
-
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
             g.Clear(Color.White);
             var me = (MouseEventArgs)e;
+
+            File.WriteAllText("l-system.txt", richTextBox1.Text);
+            system = new L_System("l-system.txt");
+
             long_rule = system.ApplyRules(generation);
+
+            width = 10;
+            line_color = Color.Black;
             Interpret(me.X, me.Y);
         }
 
