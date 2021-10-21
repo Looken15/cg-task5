@@ -16,7 +16,7 @@ namespace task5
         private L_System system;
         private static int generation = 2;
         private Graphics g;
-        private Color line_color = Color.Black;
+        private Color color = Color.Black;
         private double len = 300.0 / Math.Pow(1.5, generation);
         private float width = 5;
 
@@ -43,7 +43,7 @@ namespace task5
             {
                 if (new char[] { 'F', 'A', 'B', 'X', 'Y' }.Contains(long_rule[i]))
                 {
-                    (x, y) = DrawLine(x, y, angle, len, width, line_color);
+                    (x, y) = DrawLine(x, y, angle, len, width, color);
                 }
                 else if (long_rule[i] == '-')
                 {
@@ -62,13 +62,13 @@ namespace task5
                 else if (long_rule[i] == '[')
                 {
                     ++i;
-                    InterpretStep(ref i, x, y, angle, len, width, line_color);
+                    InterpretStep(ref i, x, y, angle, len, width, color);
                 }
                 else if (long_rule[i] == '@')
                 {
                     width = width * 2 / 3;
                     len = len * 4 / 5.0;
-                    line_color = Color.FromArgb((line_color.R + 30) * 4 / 5, line_color.G, line_color.B);
+                    color = Color.FromArgb((color.R + 30) * 4 / 5, color.G, color.B);
                 }
             }
         }
@@ -79,7 +79,7 @@ namespace task5
             {
                 if (new char[] { 'F', 'A', 'B', 'X', 'Y' }.Contains(long_rule[i]))
                 {
-                    (x, y) = DrawLine(x, y, angle, len, width, line_color);
+                    (x, y) = DrawLine(x, y, angle, len, width, color);
                 }
                 else if (long_rule[i] == '-')
                 {
@@ -98,13 +98,13 @@ namespace task5
                 else if (long_rule[i] == '[')
                 {
                     ++i;
-                    InterpretStep(ref i, x, y, angle, len, width, line_color);
+                    InterpretStep(ref i, x, y, angle, len, width, color);
                 }
                 else if (long_rule[i] == '@')
                 {
                     width = width * 2 / 3;
                     len = len * 4 / 5.0;
-                    line_color = Color.FromArgb((line_color.R + 30) * 4 / 5, line_color.G, line_color.B);
+                    color = Color.FromArgb((color.R + 50) * 4 / 5, color.G, color.B);
                 }
                 ++i;
             }
@@ -129,7 +129,7 @@ namespace task5
             float new_x = (float)(x + Math.Cos(angle) * len);
             float new_y = (float)(y + Math.Sin(angle) * len);
 
-            g.DrawLine(new Pen(line_color, width), x, y, new_x, new_y);
+            g.DrawLine(new Pen(color, width), x, y, new_x, new_y);
             pictureBox1.Refresh();
 
             return (new_x, new_y);
@@ -155,7 +155,7 @@ namespace task5
             long_rule = system.ApplyRules(generation);
 
             width = 10;
-            line_color = Color.Black;
+            color = Color.Black;
             Interpret(me.X, me.Y);
         }
 

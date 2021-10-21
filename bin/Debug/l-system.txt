@@ -1,2 +1,2 @@
-X 45 up
-X F[@[-X]+X]
+F 22 up
+F @FF-[-F+F+F]+[+F-F-F]
