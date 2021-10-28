@@ -28,5 +28,11 @@ namespace task5
             Form3 f3 = new Form3();
             f3.ShowDialog();
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Form4 f4 = new Form4();
+            f4.ShowDialog();
+        }
     }
 }
